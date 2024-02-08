@@ -44,7 +44,7 @@
 		0F8CBD8C2B758D68008B920A /* Rick and MortyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Rick and MortyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F8CBD902B758D68008B920A /* Rick_and_MortyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rick_and_MortyUITests.swift; sourceTree = "<group>"; };
 		0F8CBD922B758D68008B920A /* Rick_and_MortyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rick_and_MortyUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		0F8CBD9F2B758FAC008B920A /* RickAndMortyPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = RickAndMortyPackage; path = ../RickAndMortyPackage; sourceTree = "<group>"; };
+		0F8CBDA02B75918F008B920A /* RickandMortyPackage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RickandMortyPackage; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,7 @@
 		0F8CBD692B758D65008B920A = {
 			isa = PBXGroup;
 			children = (
-				0F8CBD9F2B758FAC008B920A /* RickAndMortyPackage */,
+				0F8CBDA02B75918F008B920A /* RickandMortyPackage */,
 				0F8CBD742B758D65008B920A /* Rick and Morty */,
 				0F8CBD852B758D68008B920A /* Rick and MortyTests */,
 				0F8CBD8F2B758D68008B920A /* Rick and MortyUITests */,
