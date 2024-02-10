@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    let viewModel = CharacterListViewModel()
     var body: some View {
         TabView {
-            CharacterListView()
+            CharacterListView(viewModel: viewModel)
+                .navigationBarTitle("Characters", displayMode: .large)
                 .tabItem {
                     TabBarIcon.characters.image
                     Text("Characters")
@@ -21,7 +23,7 @@ struct ContentView: View {
                     Text("Episodes")
                 }
         }
-        .accentColor(Color("Green"))
+      //  .accentColor(Color("DefaultColor"))
     }
 }
 

@@ -14,8 +14,11 @@ public struct URLImage: View {
         self.imageURL = imageURL
     }
     public var body: some View {
+        
         AsyncImage(url: imageURL) { image in
-            image.image?.resizable()
+            image.resizable()
+        } placeholder: {
+            ShimmerEffectBox()
         }
     }
 }

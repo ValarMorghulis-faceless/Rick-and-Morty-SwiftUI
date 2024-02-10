@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CharacterDetailPresenter {
+struct CharacterDetailPresenter: Hashable {
     let image: URL
     let name: String
     let sections: [InfoSection]

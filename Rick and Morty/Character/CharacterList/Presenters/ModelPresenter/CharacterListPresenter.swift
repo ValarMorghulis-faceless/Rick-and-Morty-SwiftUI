@@ -50,7 +50,8 @@ enum CharacterListPresentation{
 }
 
 //MARK: - Error
-struct CharachterListError {
+
+struct CharacterListError {
     let title: String
     let description: String
 }

@@ -52,7 +52,8 @@ struct CharacterView<ViewModel>: View where ViewModel: CharacterDetailViewModelT
 struct CharacterView_Previews: PreviewProvider {
    static let dependencies = CharacterDetailModuleFactory()
     static var previews: some View {
-        dependencies.make(character: mockCharacterList[0])
+       CharacterView(viewModel: dependencies.make(character: mockCharacterList[0]))
             .colorScheme(.dark)
+           
     }
 }

@@ -17,7 +17,7 @@ protocol CharacterDetailViewModelType: ObservableObject {
 
 typealias ViewState = CharacterDetailPresenter
 
-final class CharacterDetailViewModel: CharacterDetailViewModelOutput {
+public final class CharacterDetailViewModel: CharacterDetailViewModelOutput {
     @Published private(set) var state: ViewState
     private let character: CharacterModel
     private let dependencies: Dependencies

@@ -8,7 +8,7 @@
 import Foundation
 
 
-public struct CharacterModel: Hashable{
+public struct CharacterModel: Hashable {
     let id: Int
     let name: String
     let status: Status
