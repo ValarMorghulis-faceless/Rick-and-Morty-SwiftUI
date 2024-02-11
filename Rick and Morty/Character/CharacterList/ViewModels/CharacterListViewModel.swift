@@ -61,14 +61,17 @@ final class CharacterListViewModel: CharacterListViewModelOutput, CharacterListV
  
     
     func scrollViewIsNearBottom() {
-        
+        guard let nextPageRequest = nextPageRequest else { return }
+        retrieveCharacters(requestType: nextPageRequest, shouldReload: false)
     }
     
     func onAppear() {
-        retrieveCharacters()
+        guard state.isPlaceholderShown else { return }
+        retrieveCharacters(requestType: .homePage, shouldReload: true)
+       // retrieveCharacters()
     }
     
-    @Published private(set) var state: ListViewState = .display(characterList: .placeholder(numberOfItems: 0))
+    @Published private(set) var state: ListViewState = .display(characterList: .placeholder(numberOfItems: 20))
     @Published private(set) var areFiltersSelected: Bool = false
     @Published private(set) var scrollToCharacterId: UUID?
     private var nextPageRequest: GetCharacterListType?
@@ -81,13 +84,33 @@ final class CharacterListViewModel: CharacterListViewModelOutput, CharacterListV
         self.coordinator = coordinator
     }
     
-    func retrieveCharacters() {
-        let characterListInfo = CharacterListInfo(characters: mockCharacterList, nextPageRequest: .homePage)
-        let characterList = dependencies.characterListViewMapper.map(from: characterListInfo)
-        let currentCharacters = state.characterList.data
-        let characters = currentCharacters + characterList.data
-        let presentation = CharacterListPresentation.data(characters: characters, hasMore: characterList.hasMore)
-        self.state = .display(characterList: presentation)
+    func retrieveCharacters(requestType: GetCharacterListType, shouldReload: Bool) {
+        Task { @MainActor in
+            let characterListResult = await dependencies.getCharacterList.retrieve(requestType: requestType)
+            switch characterListResult {
+            case .success(let listInfo):
+                print(listInfo)
+                let characterList = dependencies.characterListViewMapper.map(from: listInfo)
+                let currentCharacters = shouldReload ? [] : state.characterList.data
+                let characters = currentCharacters + characterList.data
+                let presentation = CharacterListPresentation.data(characters: characters, hasMore: characterList.hasMore)
+                self.nextPageRequest = listInfo.nextPageRequest
+                self.state = .display(characterList: presentation)
+            //    self.areFiltersSelected = !
+                self.scrollToCharacterId = shouldReload ? characters.first?.id : nil
+            case .failure(let error):
+                print(error)
+                processRetrieveCharactersError(error, shouldReload: shouldReload)
+            }
+            
+        }
+
+    }
+    
+    private func processRetrieveCharactersError(_ error: GetCharacterListError, shouldReload: Bool) {
+        guard shouldReload else { return }
+        let errorState = dependencies.characterListViewMapper.map(from: error)
+        state = .showError(errorState)
     }
     
     func showCharacter(_ character: CharacterModel) -> AnyView {
@@ -105,9 +128,10 @@ extension CharacterListViewModel: CharacterListViewModelType {
 
 extension CharacterListViewModel {
     struct Dependencies {
-    //    let getCharacterList: GetCharacterListUseCase
+        let getCharacterList: GetCharacterListUseCase
         let characterListViewMapper: CharacterListViewMapper
-        init(characterListViewMapper: CharacterListViewMapper = DefaultCharacterListViewMapper()) {
+        init(getCharacterList: GetCharacterListUseCase = GetCharacterList() ,characterListViewMapper: CharacterListViewMapper = DefaultCharacterListViewMapper()) {
+            self.getCharacterList = getCharacterList
             self.characterListViewMapper = characterListViewMapper
         }
     }

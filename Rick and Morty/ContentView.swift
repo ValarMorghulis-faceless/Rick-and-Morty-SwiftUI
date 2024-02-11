@@ -11,7 +11,6 @@ struct ContentView: View {
    private let dependenciesResolver = DependenciesResolver()
     var body: some View {
         TabView {
-          //  CharacterListView(viewModel: viewModel)
             dependenciesResolver.characterListFactory.make()
                 .tabItem {
                     TabBarIcon.characters.image
@@ -23,7 +22,6 @@ struct ContentView: View {
                     Text("Episodes")
                 }
         }
-      //  .accentColor(Color("DefaultColor"))
     }
 }
 

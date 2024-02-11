@@ -79,7 +79,7 @@ public extension CharacterModel.Status {
     }
 }
 
-private extension CharacterModel.Location {
+public extension CharacterModel.Location {
     var name: String {
         switch self {
         case let .known(name, _):

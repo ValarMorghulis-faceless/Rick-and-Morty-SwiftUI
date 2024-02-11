@@ -36,7 +36,7 @@ extension CharacterListResponse {
         let origin: Location
         let location: Location
         let image: String
-        let episodes: [String]
+        let episode: [String]
         let url: String
         let created: String
     }

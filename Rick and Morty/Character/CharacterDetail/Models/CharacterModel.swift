@@ -18,12 +18,13 @@ public struct CharacterModel: Hashable {
     let origin: Location
     let location: Location
     let image: URL
-    let episode: [String]
-    let url: String
-    let created: String
+    let episodesUrl: URL
+    let episode: [String]?
+    let url: String?
+    let created: String?
     let numberOfEpisodes: Int
     
-    init(id: Int, name: String, status: Status, species: String, type: String, gender: Gender, origin: Location, location: Location, image: URL, episode: [String], url: String, created: String, numberOfEpisodes: Int) {
+    init(id: Int, name: String, status: Status, species: String, type: String, gender: Gender, origin: Location, location: Location, image: URL,episodesUrl: URL, episode: [String]?, url: String? = nil, created: String? = nil, numberOfEpisodes: Int) {
         self.id = id
         self.name = name
         self.status = status
@@ -33,6 +34,7 @@ public struct CharacterModel: Hashable {
         self.origin = origin
         self.location = location
         self.image = image
+        self.episodesUrl =  episodesUrl
         self.episode = episode
         self.url = url
         self.created = created
@@ -58,7 +60,7 @@ public extension CharacterModel {
 
 public extension CharacterModel {
     enum Location: Hashable {
-        case known(name: String, url: URL)
+        case known(name: String, url: String)
         case unknown
     }
 }
@@ -71,9 +73,9 @@ public extension CharacterModel {
         species: "Human",
         type: "",
         gender: .male,
-        origin: .known(name: "Eart", url: .mockOriginURL),
-        location: .known(name: "Eart", url: .mockLocationUrl),
-        image: .mockimageurl,
+        origin: .known(name: "Eart", url: "Asdasd"),
+        location: .known(name: "Eart", url: "asdasdasd"),
+        image: .mockimageurl, episodesUrl: URL(string: "asdasdasdasd")!,
         episode: ["https://rickandmortyapi.com/api/episode/1",
                   "https://rickandmortyapi.com/api/episode/1",
                   "https://rickandmortyapi.com/api/episode/1",
@@ -88,182 +90,157 @@ public extension CharacterModel {
 
 
 public let mockCharacterList: [CharacterModel] = [
-        CharacterModel(
-            id: 1,
-            name: "Rick Sanchez asdas asdasd adasd asdas",
-            status: .dead,
-            species: "Human",
-            type: "",
-            gender: .female,
-            origin: .known(name: "Earth", url: .mockOriginURL),
-            location: .known(name: "Earth", url: .mockLocationUrl),
-            image: .mockimageurl,
-            episode: [
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1"
-            ],
-            url: "https://rickandmortyapi.com/api/character/1",
-            created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 63
-        ),
-        CharacterModel(
-            id: 2,
-            name: "Morty Smith",
-            status: .alive,
-            species: "Human",
-            type: "",
-            gender: .male,
-            origin: .known(name: "Earth", url: .mockOriginURL),
-            location: .known(name: "Earth", url: .mockLocationUrl),
-            image: .mockimageurl,
-            episode: [
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1"
-            ],
-            url: "https://rickandmortyapi.com/api/character/2",
-            created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 231
-        ),
-        CharacterModel(
-            id: 3,
-            name: "Rick Sanchez",
-            status: .dead,
-            species: "Human",
-            type: "",
-            gender: .male,
-            origin: .known(name: "Earth", url: .mockOriginURL),
-            location: .known(name: "Earth", url: .mockLocationUrl),
-            image: .mockimageurl,
-            episode: [
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1"
-            ],
-            url: "https://rickandmortyapi.com/api/character/1",
-            created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 123
-        ),
-        CharacterModel(
-            id: 4,
-            name: "Morty Smith",
-            status: .alive,
-            species: "Human",
-            type: "",
-            gender: .male,
-            origin: .known(name: "Earth", url: .mockOriginURL),
-            location: .known(name: "Earth", url: .mockLocationUrl),
-            image: .mockimageurl,
-            episode: [
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1"
-            ],
-            url: "https://rickandmortyapi.com/api/character/2",
-            created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 11
-        ),
-        CharacterModel(
-            id: 5,
-            name: "Rick Sanchez",
-            status: .dead,
-            species: "Human",
-            type: "",
-            gender: .male,
-            origin: .known(name: "Earth", url: .mockOriginURL),
-            location: .known(name: "Earth", url: .mockLocationUrl),
-            image: .mockimageurl,
-            episode: [
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1"
-            ],
-            url: "https://rickandmortyapi.com/api/character/1",
-            created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 11
-        ),
-        CharacterModel(
-            id: 6,
-            name: "Morty Smith",
-            status: .alive,
-            species: "Human",
-            type: "",
-            gender: .male,
-            origin: .known(name: "Earth", url: .mockOriginURL),
-            location: .known(name: "Earth", url: .mockLocationUrl),
-            image: .mockimageurl,
-            episode: [
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1"
-            ],
-            url: "https://rickandmortyapi.com/api/character/2",
-            created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 33
-        ),
-        CharacterModel(
-            id: 7,
-            name: "Rick Sanchez",
-            status: .dead,
-            species: "Human",
-            type: "",
-            gender: .male,
-            origin: .known(name: "Earth", url: .mockOriginURL),
-            location: .known(name: "Earth", url: .mockLocationUrl),
-            image: .mockimageurl,
-            episode: [
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1"
-            ],
-            url: "https://rickandmortyapi.com/api/character/1",
-            created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 44
-        ),
-        CharacterModel(
-            id: 8,
-            name: "Morty Smith",
-            status: .alive,
-            species: "Human",
-            type: "",
-            gender: .male,
-            origin: .known(name: "Earth", url: .mockOriginURL),
-            location: .known(name: "Earth", url: .mockLocationUrl),
-            image: .mockimageurl,
-            episode: [
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1",
-                "https://rickandmortyapi.com/api/episode/1"
-            ],
-            url: "https://rickandmortyapi.com/api/character/2",
-            created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 11
-        ),
-    
+    CharacterModel(
+        id: 1,
+        name: "Rick Sanchez",
+        status: .alive,
+        species: "Human",
+        type: "",
+        gender: .male,
+        origin: .known(name: "Eart", url: "Asdasd"),
+        location: .known(name: "Eart", url: "asdasdasd"),
+        image: .mockimageurl, episodesUrl: URL(string: "asdasdasdasd")!,
+        episode: ["https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1"],
+        url: "https://rickandmortyapi.com/api/character/1",
+        created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 6),
+    CharacterModel(
+        id: 1,
+        name: "Rick Sanchez",
+        status: .alive,
+        species: "Human",
+        type: "",
+        gender: .male,
+        origin: .known(name: "Eart", url: "Asdasd"),
+        location: .known(name: "Eart", url: "asdasdasd"),
+        image: .mockimageurl, episodesUrl: URL(string: "asdasdasdasd")!,
+        episode: ["https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1"],
+        url: "https://rickandmortyapi.com/api/character/1",
+        created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 6),
+    CharacterModel(
+        id: 1,
+        name: "Rick Sanchez",
+        status: .alive,
+        species: "Human",
+        type: "",
+        gender: .male,
+        origin: .known(name: "Eart", url: "Asdasd"),
+        location: .known(name: "Eart", url: "asdasdasd"),
+        image: .mockimageurl, episodesUrl: URL(string: "asdasdasdasd")!,
+        episode: ["https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1"],
+        url: "https://rickandmortyapi.com/api/character/1",
+        created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 6),
+    CharacterModel(
+        id: 1,
+        name: "Rick Sanchez",
+        status: .alive,
+        species: "Human",
+        type: "",
+        gender: .male,
+        origin: .known(name: "Eart", url: "Asdasd"),
+        location: .known(name: "Eart", url: "asdasdasd"),
+        image: .mockimageurl, episodesUrl: URL(string: "asdasdasdasd")!,
+        episode: ["https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1"],
+        url: "https://rickandmortyapi.com/api/character/1",
+        created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 6),
+    CharacterModel(
+        id: 1,
+        name: "Rick Sanchez",
+        status: .alive,
+        species: "Human",
+        type: "",
+        gender: .male,
+        origin: .known(name: "Eart", url: "Asdasd"),
+        location: .known(name: "Eart", url: "asdasdasd"),
+        image: .mockimageurl, episodesUrl: URL(string: "asdasdasdasd")!,
+        episode: ["https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1"],
+        url: "https://rickandmortyapi.com/api/character/1",
+        created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 6),
+    CharacterModel(
+        id: 1,
+        name: "Rick Sanchez",
+        status: .alive,
+        species: "Human",
+        type: "",
+        gender: .male,
+        origin: .known(name: "Eart", url: "Asdasd"),
+        location: .known(name: "Eart", url: "asdasdasd"),
+        image: .mockimageurl, episodesUrl: URL(string: "asdasdasdasd")!,
+        episode: ["https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1"],
+        url: "https://rickandmortyapi.com/api/character/1",
+        created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 6),
+    CharacterModel(
+        id: 1,
+        name: "Rick Sanchez",
+        status: .alive,
+        species: "Human",
+        type: "",
+        gender: .male,
+        origin: .known(name: "Eart", url: "Asdasd"),
+        location: .known(name: "Eart", url: "asdasdasd"),
+        image: .mockimageurl, episodesUrl: URL(string: "asdasdasdasd")!,
+        episode: ["https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1"],
+        url: "https://rickandmortyapi.com/api/character/1",
+        created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 6),
+    CharacterModel(
+        id: 1,
+        name: "Rick Sanchez",
+        status: .alive,
+        species: "Human",
+        type: "",
+        gender: .male,
+        origin: .known(name: "Eart", url: "Asdasd"),
+        location: .known(name: "Eart", url: "asdasdasd"),
+        image: .mockimageurl, episodesUrl: URL(string: "asdasdasdasd")!,
+        episode: ["https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1",
+                  "https://rickandmortyapi.com/api/episode/1"],
+        url: "https://rickandmortyapi.com/api/character/1",
+        created: "2017-11-04T18:48:46.250Z", numberOfEpisodes: 6),
 
 ]

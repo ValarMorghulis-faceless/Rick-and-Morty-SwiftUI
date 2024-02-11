@@ -31,7 +31,7 @@ public enum GetCharacterListError: Error {
 public enum GetCharacterListType: Equatable {
     case homePage
    // case filtered(Filters)
-   // case url(URL)
+    case url(URL)
 }
 
 public protocol GetCharacterListUseCase {

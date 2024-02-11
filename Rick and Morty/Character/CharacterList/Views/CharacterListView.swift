@@ -40,7 +40,7 @@ private extension CharacterListView {
     }
     
     var columns: [GridItem] {
-        let numberOfColumns = 2
+        let numberOfColumns = 1
         return Array(repeating: GridItem(.flexible()), count: numberOfColumns)
     }
     
@@ -62,10 +62,27 @@ private extension CharacterListView {
 
                             
                         }
-
+                        if characterList.hasMore {
+                            HStack(alignment: .center, spacing: 6) {
+                                Spacer()
+                                ProgressView()
+                                Text("Fetching more")
+                                    .font(.footnote)
+                                    .padding([.top, .bottom])
+                                Spacer()
+                            }
+                            
+                            .onAppear(perform: viewModel.input.scrollViewIsNearBottom)
+                            
+                        }
                     }
                     .padding()
+             
                    
+                }
+                .onChange(of: viewModel.output.scrollToCharacterId) { characterId in
+                    guard let characterId = characterId else { return }
+                    scrollViewProxy.scrollTo(characterId, anchor: .top)
                 }
 
             }
