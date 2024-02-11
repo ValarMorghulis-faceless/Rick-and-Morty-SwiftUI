@@ -90,7 +90,7 @@ public extension CharacterModel {
 public let mockCharacterList: [CharacterModel] = [
         CharacterModel(
             id: 1,
-            name: "Rick Sanchez",
+            name: "Rick Sanchez asdas asdasd adasd asdas",
             status: .dead,
             species: "Human",
             type: "",
@@ -135,7 +135,7 @@ public let mockCharacterList: [CharacterModel] = [
         CharacterModel(
             id: 3,
             name: "Rick Sanchez",
-            status: .alive,
+            status: .dead,
             species: "Human",
             type: "",
             gender: .male,
@@ -179,7 +179,7 @@ public let mockCharacterList: [CharacterModel] = [
         CharacterModel(
             id: 5,
             name: "Rick Sanchez",
-            status: .alive,
+            status: .dead,
             species: "Human",
             type: "",
             gender: .male,
@@ -223,7 +223,7 @@ public let mockCharacterList: [CharacterModel] = [
         CharacterModel(
             id: 7,
             name: "Rick Sanchez",
-            status: .alive,
+            status: .dead,
             species: "Human",
             type: "",
             gender: .male,

@@ -15,15 +15,17 @@ struct CharacterCellView: View {
             URLImage(imageURL: presentation.image)
                 .scaledToFill()
             Text(presentation.name)
-                .font(.headline)
+                .font(.customFont(font: .montserratFont, style: .medium, size: .h2))
+                .foregroundColor(Color("DefaultColor"))
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
                 .padding([.all], 6)
-                .background(Color.primary.colorInvert().opacity(0.75))
+                .background(Color.primary.colorInvert().opacity(0.50))
+            
         }
         .overlay {
             RoundedRectangle(cornerRadius: 6)
-                .stroke(Color("DefaultColor"), lineWidth: 3)
+                .stroke(Color(presentation.model.status.statusColor), lineWidth: 2)
         }
     }
 }

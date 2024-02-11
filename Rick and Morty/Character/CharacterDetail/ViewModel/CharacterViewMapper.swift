@@ -69,7 +69,7 @@ private extension CharacterModel.Gender {
     }
 }
 
-private extension CharacterModel.Status {
+public extension CharacterModel.Status {
     var statusColor: String {
         switch self {
         case .alive: return "Green"

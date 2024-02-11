@@ -9,12 +9,12 @@ import SwiftUI
 
 public struct CharacterDetailModuleFactory {
     
-    public func make(character: CharacterModel) -> CharacterDetailViewModel {
+    public func make(character: CharacterModel) -> some View {
         let viewModelDependencies = CharacterDetailViewModel.Dependencies()
         
         let viewModel = CharacterDetailViewModel(character: character, dependencies: viewModelDependencies)
         
-        return viewModel
+        return CharacterView(viewModel: viewModel)
         
     }
 }

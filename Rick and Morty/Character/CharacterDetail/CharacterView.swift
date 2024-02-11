@@ -45,15 +45,16 @@ struct CharacterView<ViewModel>: View where ViewModel: CharacterDetailViewModelT
                         }
 
             }
+            .navigationBarTitle("\(viewModel.output.state.name)", displayMode: .large)
             .scrollIndicators(.hidden)
     }
 }
 
-struct CharacterView_Previews: PreviewProvider {
-   static let dependencies = CharacterDetailModuleFactory()
-    static var previews: some View {
-       CharacterView(viewModel: dependencies.make(character: mockCharacterList[0]))
-            .colorScheme(.dark)
-           
-    }
-}
+//struct CharacterView_Previews: PreviewProvider {
+//   static let dependencies = CharacterDetailModuleFactory()
+//    static var previews: some View {
+//       CharacterView(viewModel: dependencies.make(character: mockCharacterList[0]))
+//            .colorScheme(.dark)
+//
+//    }
+//}

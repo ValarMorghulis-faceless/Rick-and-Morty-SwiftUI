@@ -58,9 +58,7 @@ final class CharacterListViewModel: CharacterListViewModelOutput, CharacterListV
         return AnyView(Text("Fuck youuuuu"))
     }
     
-    func showCharacter(_ character: CharacterModel) -> AnyView {
-        return AnyView(Text("Fuck youuuuuu"))
-    }
+ 
     
     func scrollViewIsNearBottom() {
         
@@ -74,11 +72,13 @@ final class CharacterListViewModel: CharacterListViewModelOutput, CharacterListV
     @Published private(set) var areFiltersSelected: Bool = false
     @Published private(set) var scrollToCharacterId: UUID?
     private var nextPageRequest: GetCharacterListType?
+    private let coordinator: CharacterListCoordinator
    // private var selectedFilters = Filters.default
     private let dependencies: Dependencies
     
-    init(dependencies: Dependencies = Dependencies()){
+    init(coordinator: CharacterListCoordinator ,dependencies: Dependencies = Dependencies()){
         self.dependencies = dependencies
+        self.coordinator = coordinator
     }
     
     func retrieveCharacters() {
@@ -88,6 +88,10 @@ final class CharacterListViewModel: CharacterListViewModelOutput, CharacterListV
         let characters = currentCharacters + characterList.data
         let presentation = CharacterListPresentation.data(characters: characters, hasMore: characterList.hasMore)
         self.state = .display(characterList: presentation)
+    }
+    
+    func showCharacter(_ character: CharacterModel) -> AnyView {
+        coordinator.showCharacter(character)
     }
     
 }

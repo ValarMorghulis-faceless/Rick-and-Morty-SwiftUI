@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    let viewModel = CharacterListViewModel()
+   private let dependenciesResolver = DependenciesResolver()
     var body: some View {
         TabView {
-            CharacterListView(viewModel: viewModel)
-                .navigationBarTitle("Characters", displayMode: .large)
+          //  CharacterListView(viewModel: viewModel)
+            dependenciesResolver.characterListFactory.make()
                 .tabItem {
                     TabBarIcon.characters.image
                     Text("Characters")
