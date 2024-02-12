@@ -9,14 +9,17 @@ import SwiftUI
 
 protocol ResolverProtocol {
     var characterListFactory: CharacterListModuleFactory { get }
+    var episodeListFactory: EpisodeListModuleFactory { get }
 }
 
 struct DependenciesResolver: ResolverProtocol {
     let characterListFactory: CharacterListModuleFactory
-    
+    let episodeListFactory: EpisodeListModuleFactory
     init() {
-        let characterDetailDependencies = CharacterDetailModuleFactory()
-        let characterDetailFactory = characterDetailDependencies
+        let episodeListDependencies = EpisodeListModuleFactory.Dependencies()
+        episodeListFactory = EpisodeListModuleFactory(dependencies: episodeListDependencies)
+        let characterDetailDependencies = CharacterDetailModuleFactory.Dependencies(getEpisodeList: episodeListFactory.useCases.getEpisodeList)
+        let characterDetailFactory = CharacterDetailModuleFactory(dependencies: characterDetailDependencies)
         let characterLitDependencies = CharacterListModuleFactory.Dependencies()
         characterLitDependencies.configure { character in
             AnyView(characterDetailFactory.make(character: character))

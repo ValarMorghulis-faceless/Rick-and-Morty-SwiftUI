@@ -9,15 +9,23 @@ import SwiftUI
 
 protocol CharacterDetailViewMapper {
     func map(from character: CharacterModel) -> CharacterDetailPresenter
+    func map(from listInfo: EpisodeListInfo, for presenter: CharacterDetailPresenter) -> CharacterDetailPresenter
 }
 
 struct DefaultCharacterDetailViewMapper: CharacterDetailViewMapper {
+    func map(from listInfo: EpisodeListInfo, for presenter: CharacterDetailPresenter) -> CharacterDetailPresenter {
+        let episodes = listInfo.episodes.map { episode in
+            CharacterDetailPresenter.EpisodePresenterData(title: "\(episode.episode) · \(episode.name)", airDate: episode.airDate, model: episode)
+        }
+        return CharacterDetailPresenter(image: presenter.image, name: presenter.name, sections: presenter.sections, episodesSectionTitle: presenter.episodesSectionTitle, episodes: .data(episodes))
+    }
+    
     func map(from character: CharacterModel) -> CharacterDetailPresenter {
         let sections = [
             makeGeneralInfoSection(from: character),
             makeLocationInfoSection(from: character)
         ]
-        return CharacterDetailPresenter(image: character.image, name: character.name, sections: sections)
+        return CharacterDetailPresenter(image: character.image, name: character.name, sections: sections, episodesSectionTitle: makeEpisodesSectionTitle(from: character), episodes: .placeholder(numberOfItems: character.numberOfEpisodes))
     }
     private func makeGeneralInfoSection(from character: CharacterModel) -> CharacterDetailPresenter.InfoSection {
         var  infoRows: [CharacterDetailPresenter.InfoRow] = [

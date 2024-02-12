@@ -16,6 +16,7 @@ struct CharacterCellView: View {
             VStack(alignment: .leading) {
                 URLImage(imageURL: presentation.image)
                     .scaledToFit()
+                    .cornerRadius(12)
                 VStack(alignment: .leading) {
                     Text(presentation.name)
                         .font(.customFont(font: .montserratFont, style: .bold, size: .h0))

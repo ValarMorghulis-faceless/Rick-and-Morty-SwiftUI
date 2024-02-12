@@ -43,9 +43,35 @@ struct CharacterView<ViewModel>: View where ViewModel: CharacterDetailViewModelT
 
 
                         }
+                Section {
+                    ForEach(presentation.state.episodes.data, id: \.self) { episodePresentation in
+                        
+                        NavigationLink {
+                            EmptyView()
+                        } label: {
+                            VStack(alignment: .leading) {
+                                Text(episodePresentation.title)
+                                    .font(.customFont(font: .montserratFont, style: .bold, size: .h2))
+                                    .minimumScaleFactor(0.5)
+                                    .lineLimit(1)
+                                Text(episodePresentation.airDate)
+                                    .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
+                                    .minimumScaleFactor(0.5)
+                                    .lineLimit(1)
+                            }
+                        }
+
+                        
+                    }
+                } header: {
+                    Text(presentation.state.episodesSectionTitle)
+                        .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
+
+                }
 
             }
             .navigationBarTitle("\(viewModel.output.state.name)", displayMode: .large)
+            .onAppear(perform: viewModel.input.onAppear)
             .scrollIndicators(.hidden)
     }
 }
