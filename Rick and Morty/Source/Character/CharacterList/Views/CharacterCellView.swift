@@ -19,67 +19,48 @@ struct CharacterCellView: View {
                     .cornerRadius(12)
                 VStack(alignment: .leading) {
                     Text(presentation.name)
-                        .font(.customFont(font: .montserratFont, style: .bold, size: .h0))
-                        .minimumScaleFactor(0.5)
+                        .font(.customFont(font: .montserratFont, style: .bold, size: .h3))
                         .lineLimit(1)
                         .foregroundColor(Color("DefaultColor"))
                     HStack {
                         Image(systemName: "circle.fill")
                             .foregroundColor(Color(presentation.model.status.statusColor))
-                            .font(.system(size: 12))
+                            .font(.system(size: 8))
                         Text("\(presentation.model.status.rawValue.capitalizedFirstLetter()) - \(presentation.model.species)")
-                            .font(.customFont(font: .montserratFont, style: .medium, size: .h2))
-                            .minimumScaleFactor(0.5)
+                            .font(.customFont(font: .montserratFont, style: .medium, size: .h12))
                             .lineLimit(1)
                             .foregroundColor(Color("DefaultColor"))
                     }
-                    VStack(alignment: .leading, spacing: 5) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text("Last Known location:")
-                            .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
+                            .font(.customFont(font: .montserratFont, style: .medium, size: .h12))
                             .foregroundColor(.gray)
                         Text(presentation.model.location.name)
-                            .font(.customFont(font: .montserratFont, style: .medium, size: .h2))
-                            .minimumScaleFactor(0.5)
+                            .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
                             .lineLimit(1)
                             .foregroundColor(Color("DefaultColor"))
 
                     }
-                    .padding(.top, 20)
-                    VStack(alignment: .leading, spacing: 5) {
+                    .padding(.top,5)
+                    VStack(alignment: .leading, spacing: 2) {
                         Text("First seen in:")
-                            .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
+                            .font(.customFont(font: .montserratFont, style: .medium, size: .h12))
                             .foregroundColor(.gray)
                         Text(presentation.model.origin.name)
-                            .font(.customFont(font: .montserratFont, style: .medium, size: .h2))
-                            .minimumScaleFactor(0.5)
+                            .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
                             .lineLimit(1)
                             .foregroundColor(Color("DefaultColor"))
 
                     }
-                    .padding(.top, 20)
+                    .padding(.top,5)
 
                 }
             }
         }
-     
-//        ZStack(alignment: .bottom) {
-//            URLImage(imageURL: presentation.image)
-//                .scaledToFill()
-//            Text(presentation.name)
-//                .font(.customFont(font: .montserratFont, style: .medium, size: .h2))
-//                .foregroundColor(Color("DefaultColor"))
-//                .multilineTextAlignment(.center)
-//                .frame(maxWidth: .infinity)
-//                .padding([.all], 6)
-//                .background(Color.primary.colorInvert().opacity(0.50))
-//
-//        }
-//        .overlay {
-//            RoundedRectangle(cornerRadius: 6)
-//                .stroke(Color(presentation.model.status.statusColor), lineWidth: 2)
-//        }
+
     }
 }
+
 
 struct CharacterCellView_Previews: PreviewProvider {
     static let presentation: CharacterPresenter = CharacterPresenter(image: mockCharacterList[0].image, name: mockCharacterList[0].name, model: mockCharacterList[0])
@@ -87,11 +68,3 @@ struct CharacterCellView_Previews: PreviewProvider {
         CharacterCellView(presentation: presentation)
     }
 }
-//struct CharacterView_Previews: PreviewProvider {
-//   static let dependencies = CharacterDetailModuleFactory()
-//    static var previews: some View {
-//       CharacterView(viewModel: dependencies.make(character: mockCharacterList[0]))
-//            .colorScheme(.dark)
-//
-//    }
-//}

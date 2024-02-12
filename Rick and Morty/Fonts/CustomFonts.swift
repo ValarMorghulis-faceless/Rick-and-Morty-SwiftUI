@@ -22,8 +22,11 @@ enum CustomFontStyle: String {
 enum CustomFontSize: CGFloat {
     case h0 = 36.0
     case h1 = 32.0
+    case h28 = 28.0
+    case h24 = 24.0
     case h2 = 20.0
     case h3 = 16.0
+    case h12 = 12.0
     case h4 = 8.0
 }
 

@@ -40,7 +40,7 @@ private extension CharacterListView {
     }
     
     var columns: [GridItem] {
-        let numberOfColumns = 1
+        let numberOfColumns = 2
         return Array(repeating: GridItem(.flexible()), count: numberOfColumns)
     }
     
