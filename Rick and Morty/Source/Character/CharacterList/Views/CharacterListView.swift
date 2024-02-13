@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CharacterListView<ViewModel>: View where ViewModel: CharacterListViewModelType {
     @ObservedObject var viewModel: ViewModel
+    @StateObject private var searchText = SearchTextDebounce()
     @Environment(\.verticalSizeClass) private var verticalSizeClass
    
     var body: some View {
@@ -17,10 +18,16 @@ struct CharacterListView<ViewModel>: View where ViewModel: CharacterListViewMode
              stateMainView
                 .navigationTitle("Characters")
             }
+        .searchable(text: $searchText.text, placement: .navigationBarDrawer(displayMode: .always))
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             viewModel.input.onAppear()
         }
+        .onChange(of: searchText.debouncedText) { newValue in
+            viewModel.input.searchCharacters(searchText: newValue)
+        }
+
+        
     }
 }
 
@@ -35,6 +42,7 @@ private extension CharacterListView {
                 Text(error.title)
                     .font(.customFont(font: .montserratFont, style: .bold, size: .h0))
                 Text(error.description)
+                
             }
         }
     }

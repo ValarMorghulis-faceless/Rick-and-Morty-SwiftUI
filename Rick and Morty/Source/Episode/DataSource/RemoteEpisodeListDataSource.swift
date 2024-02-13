@@ -8,6 +8,7 @@
 import Foundation
 
 struct RemoteEpisodeListDataSource: EpisodeListDataSource {
+  
     
     private let requester: NetworkRequester
     
@@ -33,14 +34,24 @@ struct RemoteEpisodeListDataSource: EpisodeListDataSource {
         }
     }
     
-    func retrieve(parametres: EpisodeListRequestParameters) async -> EpisodeListDataResult {
+    func retrieve(search: String) async -> EpisodeListDataResult {
         do {
-            let data = try await requester.request(targetType: EpisodeListNetworkTargetType.filter(parametres))
+            let data = try await requester.request(targetType: EpisodeListNetworkTargetType.search(search))
             return mapResponse(from: data)
         } catch {
             return .failure(.custom(error))
         }
     }
+    
+    
+//    func retrieve(parametres: EpisodeListRequestParameters) async -> EpisodeListDataResult {
+//        do {
+//            let data = try await requester.request(targetType: EpisodeListNetworkTargetType.filter(parametres))
+//            return mapResponse(from: data)
+//        } catch {
+//            return .failure(.custom(error))
+//        }
+//    }
     
 }
 

@@ -30,7 +30,7 @@ public enum GetCharacterListError: Error {
 
 public enum GetCharacterListType: Equatable {
     case homePage
-   // case filtered(Filters)
+    case search(String)
     case url(URL)
 }
 

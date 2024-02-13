@@ -17,7 +17,7 @@ public protocol NetworkEndPoint{
 
 public enum RequestTask {
     case requestPlain
-    case request(parameters: Encodable)
+    case requestSearchText(requestSearch: String)
 }
 
 public enum HTTPMethod: String {

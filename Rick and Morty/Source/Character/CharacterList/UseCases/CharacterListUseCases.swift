@@ -22,8 +22,10 @@ struct GetCharacterList: GetCharacterListUseCase {
             print(repositoryResult)
         case let .url(url):
             repositoryResult = await dependencies.repository.retrieve(url: url)
+        case let.search(search):
+            repositoryResult = await dependencies.repository.retrieve(search: search)
         }
-        switch repositoryResult {
+        switch repositoryResult { 
         case let .success(list):
             return .success(dependencies.mapper.map(response: list))
         case let .failure(error):

@@ -9,14 +9,17 @@ import Foundation
 
 enum CharacterListEndpoint: NetworkEndPoint {
     case all
-    //case filter(CharacterListRequestParameters)
+    case search(String)
+    
     var baseURL: URL { RickAndMortyAPI.baseURL }
-    var path: String { "character/"}
+    var path: String { "character/" }
     var method: HTTPMethod { .GET }
     var task: RequestTask {
         switch self {
         case .all:
             return .requestPlain
+        case let .search(searchtxt):
+            return .requestSearchText(requestSearch: searchtxt)
         }
     }
     var headers: [String : String]? { nil }

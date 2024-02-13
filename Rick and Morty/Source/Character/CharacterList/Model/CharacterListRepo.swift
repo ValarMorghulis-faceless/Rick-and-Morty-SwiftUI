@@ -26,7 +26,7 @@ typealias CharacterListResult = Result<CharacterList, CharacterListRepositoryErr
 protocol CharacterListRepository {
     func retrieve() async -> CharacterListResult
     func retrieve(url: URL) async -> CharacterListResult
-  //  func retrieve(filters: Filters) async -> CharacterListResult
+    func retrieve(search: String) async -> CharacterListResult
 }
 
 
@@ -40,5 +40,5 @@ enum CharacterListDataSourceError: Error {
 protocol CharacterListDataSource {
     func retrieve() async -> CharacterListDataResult
     func retrieve(url: URL) async -> CharacterListDataResult
-   // func retrieve(parameters: CharacterListRequestParameters) async -> CharacterListDataResult
+    func retrieve(search: String) async -> CharacterListDataResult
 }

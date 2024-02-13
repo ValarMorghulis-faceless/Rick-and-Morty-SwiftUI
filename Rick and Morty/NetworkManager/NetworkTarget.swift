@@ -9,33 +9,42 @@ import Foundation
 
 extension NetworkEndPoint {
     var urlRequest: URLRequest {
-        let url = baseURL.appendingPathComponent(path)
+        var url = baseURL.appendingPathComponent(path)
+        switch task {
+        case let .requestSearchText(requestSearch):
+            url.append(queryItems: [URLQueryItem(name: "name", value: requestSearch)])
+        default:
+            break
+        }
+        print(url)
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = headers
         
-        switch task {
-        case .requestPlain:
-            return request
-        case let .request(parameters):
-            guard
-                let data = try? JSONEncoder().encode(AnyEncodable(parameters)),
-                let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-            else {
-                return request
-            }
-            
-            let stringParameters = json.compactMapValues(String.init(describing:))
-            if method == .GET {
-                var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
-                urlComponents?.queryItems = stringParameters.map { URLQueryItem(name: $0, value: $1)}
-                request.url = urlComponents?.url
-            } else {
-                let urlParameters = stringParameters.map { "\($0.key)=\($0.value)" }.joined(separator: "&")
-                request.httpBody = urlParameters.data(using: .utf8)
-            }
-            return request
-        }
+        return request
+        
+//        switch task {
+//        case .requestPlain:
+//            return request
+//        case let .requestSearchText(requestSearch):
+//            guard
+//                let data = try? JSONEncoder().encode(AnyEncodable(requestSearch)),
+//                let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+//            else {
+//                return request
+//            }
+//
+//            let stringParameters = json.compactMapValues(String.init(describing:))
+//            if method == .GET {
+//                var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+//                urlComponents?.queryItems = stringParameters.map { URLQueryItem(name: $0, value: $1)}
+//                request.url = urlComponents?.url
+//            } else {
+//                let urlParameters = stringParameters.map { "\($0.key)=\($0.value)" }.joined(separator: "&")
+//                request.httpBody = urlParameters.data(using: .utf8)
+//            }
+//            return request
+//        }
     }
 }
 

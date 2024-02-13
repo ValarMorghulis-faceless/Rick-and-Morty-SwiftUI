@@ -77,6 +77,7 @@
 		0FC031522B7A7CD60034068D /* EpisodeDetailViewMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC031512B7A7CD60034068D /* EpisodeDetailViewMapper.swift */; };
 		0FC031562B7A851A0034068D /* EpisodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC031552B7A851A0034068D /* EpisodeDetailView.swift */; };
 		0FC031582B7ACA410034068D /* HorizontalCharacterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC031572B7ACA410034068D /* HorizontalCharacterListView.swift */; };
+		0FC0315B2B7BF5D00034068D /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC0315A2B7BF5D00034068D /* CustomSearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +173,7 @@
 		0FC031512B7A7CD60034068D /* EpisodeDetailViewMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailViewMapper.swift; sourceTree = "<group>"; };
 		0FC031552B7A851A0034068D /* EpisodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeDetailView.swift; sourceTree = "<group>"; };
 		0FC031572B7ACA410034068D /* HorizontalCharacterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCharacterListView.swift; sourceTree = "<group>"; };
+		0FC0315A2B7BF5D00034068D /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 		0F8CBD742B758D65008B920A /* Rick and Morty */ = {
 			isa = PBXGroup;
 			children = (
+				0FC031592B7BF5BE0034068D /* SearchBar */,
 				0F8CBE132B797133008B920A /* Source */,
 				0F8CBE022B7929BC008B920A /* BaseURL */,
 				0F8CBDF82B791D8E008B920A /* NetworkManager */,
@@ -608,6 +611,14 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		0FC031592B7BF5BE0034068D /* SearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				0FC0315A2B7BF5D00034068D /* CustomSearchBar.swift */,
+			);
+			path = SearchBar;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -770,6 +781,7 @@
 				0F8CBDC22B77BCE0008B920A /* SwiftUIExtensions.swift in Sources */,
 				0F8CBDE02B77FB05008B920A /* CharacterListPresenter.swift in Sources */,
 				0F8CBDFE2B792494008B920A /* CharacterListRepo.swift in Sources */,
+				0FC0315B2B7BF5D00034068D /* CustomSearchBar.swift in Sources */,
 				0F8CBDE62B7802FC008B920A /* CharacterListViewModel.swift in Sources */,
 				0F8CBD762B758D66008B920A /* RickAndMortyApp.swift in Sources */,
 				0F8CBDB62B76887D008B920A /* CharacterListView.swift in Sources */,

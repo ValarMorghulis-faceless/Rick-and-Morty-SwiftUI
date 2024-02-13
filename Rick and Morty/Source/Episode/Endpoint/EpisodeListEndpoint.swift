@@ -9,7 +9,7 @@ import Foundation
 
 enum EpisodeListNetworkTargetType: NetworkEndPoint {
     case all
-    case filter(EpisodeListRequestParameters)
+    case search(String)
     
     var baseURL: URL { RickAndMortyAPI.baseURL }
     var path: String { "episode/"}
@@ -18,8 +18,8 @@ enum EpisodeListNetworkTargetType: NetworkEndPoint {
         switch self {
         case .all:
             return .requestPlain
-        case let .filter(parametres):
-            return .request(parameters: parametres)
+        case let .search(text):
+            return .requestSearchText(requestSearch: text)
         }
     }
     

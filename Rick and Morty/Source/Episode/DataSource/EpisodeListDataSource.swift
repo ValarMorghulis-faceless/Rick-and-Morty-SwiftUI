@@ -17,7 +17,7 @@ enum EpisodeListDataSourceError: Error {
 protocol EpisodeListDataSource {
     func retrieve() async -> EpisodeListDataResult
     func retrieve(url: URL) async -> EpisodeListDataResult
-    func retrieve(parametres: EpisodeListRequestParameters) async -> EpisodeListDataResult
+    func retrieve(search: String) async -> EpisodeListDataResult
 }
 
 struct EpisodeListRequestParameters: Encodable {

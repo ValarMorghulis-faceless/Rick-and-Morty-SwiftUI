@@ -5,13 +5,11 @@
 //  Created by Giorgi Samkharadze on 10.02.24.
 //
 
-import Foundation
-//import struct SwiftUI.Binding
-//import struct SwiftUI.AnyView
 import SwiftUI
+import Combine
 
 protocol CharacterListViewModelInput {
-    func showFilters(isPresented: Binding<Bool>) -> AnyView
+    func searchCharacters(searchText: String)
     func showCharacter(_ character: CharacterModel) -> AnyView
     func scrollViewIsNearBottom()
     func onAppear()
@@ -20,7 +18,6 @@ protocol CharacterListViewModelInput {
 
 protocol CharacterListViewModelOutput {
     var state: ListViewState { get }
-    var areFiltersSelected: Bool { get }
     var scrollToCharacterId: UUID? { get }
 }
 
@@ -54,29 +51,10 @@ enum ListViewState {
 
 final class CharacterListViewModel: CharacterListViewModelOutput, CharacterListViewModelInput {
     
-    func showFilters(isPresented: Binding<Bool>) -> AnyView {
-        return AnyView(Text("Fuck youuuuu"))
-    }
-    
- 
-    
-    func scrollViewIsNearBottom() {
-        guard let nextPageRequest = nextPageRequest else { return }
-        retrieveCharacters(requestType: nextPageRequest, shouldReload: false)
-    }
-    
-    func onAppear() {
-        guard state.isPlaceholderShown else { return }
-        retrieveCharacters(requestType: .homePage, shouldReload: true)
-       // retrieveCharacters()
-    }
-    
     @Published private(set) var state: ListViewState = .display(characterList: .placeholder(numberOfItems: 20))
-    @Published private(set) var areFiltersSelected: Bool = false
     @Published private(set) var scrollToCharacterId: UUID?
     private var nextPageRequest: GetCharacterListType?
     private let coordinator: CharacterListCoordinator
-   // private var selectedFilters = Filters.default
     private let dependencies: Dependencies
     
     init(coordinator: CharacterListCoordinator ,dependencies: Dependencies = Dependencies()){
@@ -117,6 +95,22 @@ final class CharacterListViewModel: CharacterListViewModelOutput, CharacterListV
         coordinator.showCharacter(character)
     }
     
+    func searchCharacters(searchText: String) {
+        let requestType = GetCharacterListType.search(searchText)
+        self.retrieveCharacters(requestType: requestType, shouldReload: true)
+    }
+    
+    func scrollViewIsNearBottom() {
+        guard let nextPageRequest = nextPageRequest else { return }
+        retrieveCharacters(requestType: nextPageRequest, shouldReload: false)
+    }
+    
+    func onAppear() {
+        guard state.isPlaceholderShown else { return }
+        retrieveCharacters(requestType: .homePage, shouldReload: true)
+       // retrieveCharacters()
+    }
+    
 }
 
 extension CharacterListViewModel: CharacterListViewModelType {
@@ -136,4 +130,21 @@ extension CharacterListViewModel {
         }
     }
     
+}
+
+public final class SearchTextDebounce: ObservableObject {
+    @Published var text: String = ""
+    @Published var debouncedText: String = ""
+    private var bag = Set<AnyCancellable>()
+
+    public init(dueTime: TimeInterval = 0.8) {
+        $text
+            .removeDuplicates()
+            .debounce(for: .seconds(dueTime),
+                      scheduler: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] value in
+                self?.debouncedText = value
+            })
+            .store(in: &bag)
+    }
 }

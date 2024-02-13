@@ -33,6 +33,15 @@ struct RemoteCharacterListDataSource: CharacterListDataSource {
             return .failure(.custom(error))
         }
     }
+    
+    func retrieve(search: String) async -> CharacterListDataResult {
+        do {
+            let data = try await requester.request(targetType: CharacterListEndpoint.search(search))
+            return mapResponse(from: data)
+        } catch {
+            return .failure(.custom(error))
+        }
+    }
 }
 
 private extension RemoteCharacterListDataSource {

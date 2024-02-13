@@ -24,12 +24,13 @@ struct DefaultCharacterListRepository: CharacterListRepository {
         let remoteDataSourceResult = await dependencies.remoteDataSource.retrieve(url: url)
         return mapResponse(from: remoteDataSourceResult)
     }
+    
+    func retrieve(search: String) async -> CharacterListResult {
+        let remoteDataSourceResult = await dependencies.remoteDataSource.retrieve(search: search)
+        return mapResponse(from: remoteDataSourceResult)
+    }
 
-//    func retrieve(filters: Filters) async -> CharacterListResult {
-//        let filters = CharacterListRequestParameters(filters: filters)
-//        let remoteDataSourceResult = await dependencies.remoteDataSource.retrieve(parameters: filters)
-//        return mapResponse(from: remoteDataSourceResult)
-//    }
+
 }
 
 private extension DefaultCharacterListRepository {
