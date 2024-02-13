@@ -16,7 +16,7 @@ protocol EpisodeListViewModelInput {
 }
 
 protocol EpisodeListViewModelOutput {
-    var state: EpisodeViewState { get }
+    var state: EpisodeListViewState { get }
 }
 
 protocol EpisodeListViewModelType: ObservableObject {
@@ -24,7 +24,7 @@ protocol EpisodeListViewModelType: ObservableObject {
     var output: EpisodeListViewModelOutput { get }
 }
 
-enum EpisodeViewState {
+enum EpisodeListViewState {
     case display(episodeList: EpisodeListPresenter)
     case showError(_ error: EpisodeListError)
     
@@ -48,7 +48,7 @@ enum EpisodeViewState {
 
 
 final class EpisodeListViewModel: EpisodeListViewModelOutput {
-    @Published private(set) var state: EpisodeViewState = .display(episodeList: .placeholder(numberOfItems: 20))
+    @Published private(set) var state: EpisodeListViewState = .display(episodeList: .placeholder(numberOfItems: 20))
     private var nextPageRequest: GetEpisodeListType?
   //  private let navigator: EpisodeListWireframe
     private let dependencies: Dependencies

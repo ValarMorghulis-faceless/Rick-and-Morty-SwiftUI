@@ -18,6 +18,7 @@ struct CharacterDetailPresenter: Hashable {
 extension CharacterDetailPresenter {
     struct InfoSection: Hashable {
         let title: String
+        let systemImage: String
         let rows: [InfoRow]
     }
 }

@@ -5,11 +5,11 @@
 //  Created by Giorgi Samkharadze on 10.02.24.
 //
 
-import Foundation
+import SwiftUI
 
 protocol CharacterDetailViewModelInput {
     func onAppear()
-  //  func showEpisode(_ episode: EpisodeModel) -> AnyView
+    func showEpisode(_ episode: EpisodeModel) -> AnyView
 }
 
 protocol CharacterDetailViewModelOutput {
@@ -26,10 +26,12 @@ typealias ViewState = CharacterDetailPresenter
 public final class CharacterDetailViewModel: CharacterDetailViewModelOutput {
     @Published private(set) var state: ViewState
     private let character: CharacterModel
+    private let coordinator: CharacterDetailCoordinatorProtocol
     private let dependencies: Dependencies
     
-    init(character: CharacterModel, dependencies: Dependencies){
+    init(coordinator: CharacterDetailCoordinatorProtocol, character: CharacterModel, dependencies: Dependencies){
         self.character = character
+        self.coordinator = coordinator
         self.dependencies =  dependencies
         state = dependencies.characterDetailViewMapper.map(from: character)
     }
@@ -56,6 +58,10 @@ extension CharacterDetailViewModel: CharacterDetailViewModelInput {
     func onAppear() {
         guard state.episodes.isPlaceholder else { return }
         retrieveCharacterEpisodes()
+    }
+    
+    func showEpisode(_ episode: EpisodeModel) -> AnyView {
+        coordinator.showEpisode(episode)
     }
 }
 

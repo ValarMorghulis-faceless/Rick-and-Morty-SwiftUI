@@ -23,7 +23,7 @@ struct ShimmerEffectBox: View {
             withAnimation (.easeInOut (duration: 1)
                 .repeatForever (autoreverses: false)) {
                     startPoint = .init(x: 1, y: 1)
-                    endPoint = .init(x: 2.2, y: 2.2)
+                    endPoint = .init(x: 2.0, y: 2.0)
                 }
         }
     }

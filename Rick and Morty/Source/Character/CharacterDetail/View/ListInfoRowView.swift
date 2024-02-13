@@ -24,8 +24,9 @@ struct ListInfoRowView: View {
                 Text(label)
                     .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
             } icon: {
-                Text(icon)
+                Image(systemName: icon)
                     .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
+                    .foregroundColor(.purple)
             }
             Spacer()
             Text(value)

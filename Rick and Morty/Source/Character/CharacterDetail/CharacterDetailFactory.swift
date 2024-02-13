@@ -12,9 +12,11 @@ public struct CharacterDetailModuleFactory {
     let dependencies: Dependencies
     
     public func make(character: CharacterModel) -> some View {
+        let coordinator = CharacterDetailCoordinator(dependencies: dependencies
+        )
         let viewModelDependencies = CharacterDetailViewModel.Dependencies(getEpisodeList: dependencies.getEpisodeList)
         
-        let viewModel = CharacterDetailViewModel(character: character, dependencies: viewModelDependencies)
+        let viewModel = CharacterDetailViewModel(coordinator: coordinator, character: character, dependencies: viewModelDependencies)
         
         return CharacterView(viewModel: viewModel)
         

@@ -18,7 +18,12 @@ public struct URLImage: View {
         AsyncImage(url: imageURL) { image in
             image.resizable()
         } placeholder: {
-            ShimmerEffectBox()
+            ZStack {
+                Color("Yellow")
+                ProgressView()
+            }
+        //   ShimmerEffectBox()
         }
     }
 }
+

@@ -37,8 +37,17 @@ struct CharacterView<ViewModel>: View where ViewModel: CharacterDetailViewModelT
                                     ListInfoRowView(label: rowInfo.title, icon: rowInfo.emojiIcon, value: rowInfo.value, colorText: rowInfo.statusColor)
                                 }
                             } header: {
-                                Text(section.title)
-                                    .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
+                                HStack {
+                                    Image(systemName: section.systemImage)
+                                        .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
+                                        .foregroundColor(Color("DefaultColor"))
+                                    Text(section.title)
+                                        .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
+                                    
+                                    
+                                    
+                                }
+                               
                             }
 
 
@@ -47,7 +56,7 @@ struct CharacterView<ViewModel>: View where ViewModel: CharacterDetailViewModelT
                     ForEach(presentation.state.episodes.data, id: \.self) { episodePresentation in
                         
                         NavigationLink {
-                            EmptyView()
+                            viewModel.input.showEpisode(episodePresentation.model)
                         } label: {
                             VStack(alignment: .leading) {
                                 Text(episodePresentation.title)
@@ -64,8 +73,15 @@ struct CharacterView<ViewModel>: View where ViewModel: CharacterDetailViewModelT
                         
                     }
                 } header: {
-                    Text(presentation.state.episodesSectionTitle)
-                        .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
+                    HStack {
+                        Image(systemName: "film.stack")
+                            .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
+                            .foregroundColor(Color("DefaultColor"))
+                        
+                        Text(presentation.state.episodesSectionTitle)
+                            .font(.customFont(font: .montserratFont, style: .medium, size: .h3))
+                    }
+                    
 
                 }
 

@@ -21,7 +21,7 @@ extension TabBarIcon {
         case .locations:
             return "map.fill"
         case .episodes:
-            return "tv.fill"
+            return "film.stack"
         }
     }
 

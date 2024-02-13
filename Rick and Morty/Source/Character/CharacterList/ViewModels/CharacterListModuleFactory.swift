@@ -10,6 +10,7 @@ import SwiftUI
 
 public struct CharacterListModuleFactory {
     let dependencies: Dependencies
+    public let useCases = UseCases()
 
     public init(dependencies: Dependencies) {
         self.dependencies = dependencies
@@ -36,5 +37,11 @@ public extension CharacterListModuleFactory {
             self.characterDetail = characterDetail
         }
         
+    }
+}
+
+public extension CharacterListModuleFactory {
+    struct UseCases {
+        public let getCharacterList: GetCharacterListUseCase = GetCharacterList()
     }
 }

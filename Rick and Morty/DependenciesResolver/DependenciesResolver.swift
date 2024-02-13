@@ -25,6 +25,13 @@ struct DependenciesResolver: ResolverProtocol {
             AnyView(characterDetailFactory.make(character: character))
         }
         characterListFactory = CharacterListModuleFactory(dependencies: characterLitDependencies)
+        let episodeDetailDependencies = EpisodeDetailModuleFactory.Dependencies(getCharacterList: characterListFactory.useCases.getCharacterList)
+        let episodeDetailFactory = EpisodeDetailModuleFactory(dependencies: episodeDetailDependencies)
+        
+        characterDetailDependencies.configure { episode -> AnyView in
+            AnyView(episodeDetailFactory.make(episode: episode))
+        }
+        
     }
     
 }

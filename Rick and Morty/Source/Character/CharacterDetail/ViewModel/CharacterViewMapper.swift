@@ -30,28 +30,28 @@ struct DefaultCharacterDetailViewMapper: CharacterDetailViewMapper {
     private func makeGeneralInfoSection(from character: CharacterModel) -> CharacterDetailPresenter.InfoSection {
         var  infoRows: [CharacterDetailPresenter.InfoRow] = [
             .init(emojiIcon:character.status.icon , title: "Status", value: character.status.rawValue.capitalizedFirstLetter(), statusColor: character.status.statusColor),
-            .init(emojiIcon: "🧬", title: "Specie", value: character.species, statusColor: nil),
+            .init(emojiIcon: "touchid", title: "Specie", value: character.species, statusColor: nil),
             .init(emojiIcon: character.gender.genderIcon, title: "Gender", value: character.gender.rawValue.capitalizedFirstLetter(), statusColor: nil)
         ]
         if let type = character.type, !type.isEmpty {
-            infoRows.append(.init(emojiIcon: "🌱", title: "Type", value: type.capitalizedFirstLetter(), statusColor: nil))
+            infoRows.append(.init(emojiIcon: "leaf", title: "Type", value: type.capitalizedFirstLetter(), statusColor: nil))
         }
-        return .init(title: "Info", rows: infoRows)
+        return .init(title: "Info", systemImage: "info.circle", rows: infoRows)
     }
     private func makeLocationInfoSection(from character: CharacterModel) -> CharacterDetailPresenter.InfoSection {
         let infoRows: [CharacterDetailPresenter.InfoRow] = [
-            .init(emojiIcon: "📍", title: "First seen in:", value: character.origin.name, statusColor: nil),
-            .init(emojiIcon: "🗺", title: "Last known location:", value: character.location.name, statusColor: nil)
+            .init(emojiIcon: "mappin.and.ellipse", title: "First seen in:", value: character.origin.name, statusColor: nil),
+            .init(emojiIcon: "globe.americas", title: "Last known location:", value: character.location.name, statusColor: nil)
         ]
         
-        return .init(title: "Location", rows: infoRows)
+        return .init(title: "Location", systemImage: "location.circle", rows: infoRows)
     }
     
     private func makeEpisodesSectionTitle(from character: CharacterModel) -> String {
         if character.numberOfEpisodes == 1 {
             return "Episode"
         } else {
-            return "Episodes (\(character.numberOfEpisodes)"
+            return "Episodes (\(character.numberOfEpisodes))"
         }
     }
 }
@@ -59,9 +59,9 @@ struct DefaultCharacterDetailViewMapper: CharacterDetailViewMapper {
 private extension CharacterModel.Status {
     var icon: String {
         switch self {
-        case .alive: return "✅"
-        case .dead: return "⚰️"
-        case .unknown: return "❓"
+        case .alive: return "person.fill.checkmark"
+        case .dead: return "person.fill.xmark"
+        case .unknown: return "person.fill.questionmark"
         }
     }
 }
@@ -69,10 +69,10 @@ private extension CharacterModel.Status {
 private extension CharacterModel.Gender {
     var genderIcon: String {
         switch self {
-        case .male: return "🙍‍♂️"
-        case .female: return "🙎‍♀️"
-        case .unknown: return "👽"
-        case .genderless: return "🪱"
+        case .male: return "figure.dress.line.vertical.figure"
+        case .female: return "figure.dress.line.vertical.figure"
+        case .unknown: return "poweroutlet.type.f.fill"
+        case .genderless: return "person.fill.turn.down"
         }
     }
 }
