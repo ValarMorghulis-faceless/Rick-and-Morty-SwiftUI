@@ -43,7 +43,7 @@ struct EpisodeDetailView<ViewModel>: View where ViewModel: EpisodeDetailViewMode
                         ForEach(presenter.characters.data, id: \.id) { presentation in
                             
                             NavigationLink {
-                                
+                                makeDestination(for: presentation)
                             } label: {
                                 GroupBox {
                                     VStack(alignment: .leading) {
@@ -105,6 +105,11 @@ struct EpisodeDetailView<ViewModel>: View where ViewModel: EpisodeDetailViewMode
         .onAppear(perform: viewModel.input.onAppear)
 
         }
+    
+    @ViewBuilder
+    private func makeDestination(for character: EpisodeDetailPresenter.CharacterPresenterData) -> some View {
+        viewModel.input.showCharacter(character.model)
+    }
     
 }
 

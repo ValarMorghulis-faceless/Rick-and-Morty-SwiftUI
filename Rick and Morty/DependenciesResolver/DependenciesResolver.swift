@@ -31,6 +31,9 @@ struct DependenciesResolver: ResolverProtocol {
         characterDetailDependencies.configure { episode -> AnyView in
             AnyView(episodeDetailFactory.make(episode: episode))
         }
+        episodeDetailDependencies.configure { character -> AnyView in
+            AnyView(characterDetailFactory.make(character: character))
+        }
         
     }
     
