@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0F58BC7C2B7CF5F000E815E7 /* CharacterList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F58BC7B2B7CF5F000E815E7 /* CharacterList.json */; };
 		0F58BC7E2B7CF60E00E815E7 /* EpisodeList.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F58BC7D2B7CF60E00E815E7 /* EpisodeList.json */; };
+		0F58BC802B7D029300E815E7 /* DefaultNetworkRequesterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F58BC7F2B7D029300E815E7 /* DefaultNetworkRequesterTests.swift */; };
 		0F8CBD762B758D66008B920A /* RickAndMortyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8CBD752B758D66008B920A /* RickAndMortyApp.swift */; };
 		0F8CBD782B758D66008B920A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8CBD772B758D66008B920A /* ContentView.swift */; };
 		0F8CBD7A2B758D68008B920A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F8CBD792B758D68008B920A /* Assets.xcassets */; };
@@ -105,6 +106,7 @@
 /* Begin PBXFileReference section */
 		0F58BC7B2B7CF5F000E815E7 /* CharacterList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CharacterList.json; sourceTree = "<group>"; };
 		0F58BC7D2B7CF60E00E815E7 /* EpisodeList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = EpisodeList.json; sourceTree = "<group>"; };
+		0F58BC7F2B7D029300E815E7 /* DefaultNetworkRequesterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetworkRequesterTests.swift; sourceTree = "<group>"; };
 		0F8CBD722B758D65008B920A /* Rick and Morty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rick and Morty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F8CBD752B758D66008B920A /* RickAndMortyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyApp.swift; sourceTree = "<group>"; };
 		0F8CBD772B758D66008B920A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -685,6 +687,7 @@
 			isa = PBXGroup;
 			children = (
 				0FC031752B7CCD2F0034068D /* NetworkTests.swift */,
+				0F58BC7F2B7D029300E815E7 /* DefaultNetworkRequesterTests.swift */,
 			);
 			path = NetworkTest;
 			sourceTree = "<group>";
@@ -903,6 +906,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F58BC802B7D029300E815E7 /* DefaultNetworkRequesterTests.swift in Sources */,
 				0FC031762B7CCD2F0034068D /* NetworkTests.swift in Sources */,
 				0FC0316E2B7CCCD00034068D /* CharacterListTests.swift in Sources */,
 				0FC031722B7CCCF90034068D /* EpisodeDetailTests.swift in Sources */,

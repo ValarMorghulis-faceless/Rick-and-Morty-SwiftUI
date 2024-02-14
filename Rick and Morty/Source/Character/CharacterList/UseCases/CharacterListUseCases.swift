@@ -19,7 +19,6 @@ struct GetCharacterList: GetCharacterListUseCase {
         switch requestType {
         case .homePage:
             repositoryResult = await dependencies.repository.retrieve()
-            print(repositoryResult)
         case let .url(url):
             repositoryResult = await dependencies.repository.retrieve(url: url)
         case let.search(search):
