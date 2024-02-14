@@ -16,7 +16,7 @@ struct ContentView: View {
                     TabBarIcon.characters.image
                     Text("Characters")
                 }
-            AnyView(Text("Episodes"))
+            dependenciesResolver.episodeListFactory.make()
                 .tabItem {
                     TabBarIcon.episodes.image
                     Text("Episodes")

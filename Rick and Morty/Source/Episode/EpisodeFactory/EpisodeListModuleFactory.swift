@@ -15,11 +15,11 @@ public struct EpisodeListModuleFactory {
         self.dependencies = dependencies
     }
     
-//    public func make() -> some View {
-//     //   let navigator = EpisodeListNavigator(dependencies: dependencies)
-//        let viewModel = EpisodeListViewModel(dependencies: dependencies)
-//        return EpisodeListView(viewModel: viewModel)
-//    }
+    public func make() -> some View {
+        let coordinator = EpisodeListCoordinator(dependencies: dependencies)
+        let viewModel = EpisodeListViewModel(coordinator: coordinator)
+        return EpisodeListView(viewModel: viewModel)
+    }
 
     
 }

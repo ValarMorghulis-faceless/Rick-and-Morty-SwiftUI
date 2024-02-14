@@ -42,17 +42,6 @@ struct RemoteEpisodeListDataSource: EpisodeListDataSource {
             return .failure(.custom(error))
         }
     }
-    
-    
-//    func retrieve(parametres: EpisodeListRequestParameters) async -> EpisodeListDataResult {
-//        do {
-//            let data = try await requester.request(targetType: EpisodeListNetworkTargetType.filter(parametres))
-//            return mapResponse(from: data)
-//        } catch {
-//            return .failure(.custom(error))
-//        }
-//    }
-    
 }
 
 extension RemoteEpisodeListDataSource {

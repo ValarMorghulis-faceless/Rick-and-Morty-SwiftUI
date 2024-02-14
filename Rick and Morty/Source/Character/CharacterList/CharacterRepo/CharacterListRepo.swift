@@ -7,15 +7,6 @@
 
 import Foundation
 
-struct CharactersInfo {
-    let paginationURL: URL?
-}
-
-struct CharacterList {
-    let elements: [CharacterModel]
-    let info: CharactersInfo
-}
-
 enum CharacterListRepositoryError: Error {
     case unableToDecode
     case dataSource(Error)

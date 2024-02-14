@@ -46,14 +46,15 @@ enum EpisodeListViewState {
     }
 }
 
-
-final class EpisodeListViewModel: EpisodeListViewModelOutput {
+final class EpisodeListViewModel: EpisodeListViewModelOutput, EpisodeListViewModelInput {
+    
     @Published private(set) var state: EpisodeListViewState = .display(episodeList: .placeholder(numberOfItems: 20))
     private var nextPageRequest: GetEpisodeListType?
-  //  private let navigator: EpisodeListWireframe
+    private let coordinator: EpisodeListCoordinator
     private let dependencies: Dependencies
-    init(dependencies: Dependencies = Dependencies()) {
+    init(coordinator:EpisodeListCoordinator,dependencies: Dependencies = Dependencies()) {
         self.dependencies = dependencies
+        self.coordinator = coordinator
     }
     
     private func retrieveEpisodes(requestType: GetEpisodeListType, shouldReload: Bool) {
@@ -82,6 +83,25 @@ final class EpisodeListViewModel: EpisodeListViewModelOutput {
         state = .showError(errorState)
     }
     
+    func onAppear() {
+        guard state.isPlaceholderShown else { return }
+        retrieveEpisodes(requestType: .homePage, shouldReload: true)
+    }
+    
+    func showEpisode(_ episode: EpisodeModel) -> AnyView {
+        coordinator.showEpisode(episode)
+    }
+    
+    func scrollViewIsNearBottom() {
+       guard let nextPageRequest = nextPageRequest else { return }
+        retrieveEpisodes(requestType: nextPageRequest, shouldReload: false)
+    }
+    
+}
+
+extension EpisodeListViewModel: EpisodeListViewModelType {
+    var input: EpisodeListViewModelInput { self }
+    var output: EpisodeListViewModelOutput { self }
 }
 
 extension EpisodeListViewModel {
