@@ -44,7 +44,7 @@ struct RemoteCharacterListDataSource: CharacterListDataSource {
     }
 }
 
-private extension RemoteCharacterListDataSource {
+extension RemoteCharacterListDataSource {
     func mapResponse(from data: Data) -> CharacterListDataResult {
         print(data)
         let decoder = JSONDecoder()

@@ -55,7 +55,7 @@ struct RemoteEpisodeListDataSource: EpisodeListDataSource {
     
 }
 
-private extension RemoteEpisodeListDataSource {
+extension RemoteEpisodeListDataSource {
     func mapResponse(from data: Data) -> EpisodeListDataResult {
         let decoder = JSONDecoder()
         if let response = try? decoder.decode(EpisodeListResponse.self, from: data) {
